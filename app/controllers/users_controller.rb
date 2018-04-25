@@ -36,10 +36,10 @@ class UsersController < Clearance::UsersController
             user.country = country
             user.birthdate = birthdate
         end
-      end
+    end
 
       def permit_params
         params.require(:user).permit(:first_name, :email, :password)
-      end
+      end 
 
 end

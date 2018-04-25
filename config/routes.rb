@@ -1,3 +1,4 @@
+# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
@@ -8,16 +9,24 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
+  root "welcome#index"
+
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
+
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
+
   get "/sign_up" => "clearance/users#new", as: "sign_up"
 
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get 'welcome/index'
- 
-  root 'welcome#index'
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+
+  get "users/edit" => "users#edit"
+
+  get "listings/new" => "listings#new"
+
+  get "listings/:id" => "listings#show"
+
+  get "listings/:id/verify" => "listings#verify"
+
 end
 
 

@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 require 'faker'
 
 # Seed Users
@@ -14,7 +15,7 @@ user['password'] = 'asdf'
 
 
 ActiveRecord::Base.transaction do
-  20.times do 
+  1.times do 
     user['first_name'] = Faker::Name.first_name 
     user['last_name'] = Faker::Name.last_name
     user['email'] = Faker::Internet.email
@@ -22,10 +23,12 @@ ActiveRecord::Base.transaction do
     user['phone'] = Faker::PhoneNumber.phone_number
     user['country'] = Faker::Address.country
     user['birthdate'] = Faker::Date.between(50.years.ago, Date.today)
+    user['role'] = 'customer'
 
     User.create(user)
   end
 end 
+
 
 # Seed Listings
 listing = {}
@@ -33,7 +36,7 @@ uids = []
 User.all.each { |u| uids << u.id }
 
 ActiveRecord::Base.transaction do
-  40.times do 
+  20.times do 
     listing['name'] = Faker::App.name
     listing['property_type'] = ["House", "Entire Floor", "Condominium", "Villa", "Townhouse", "Castle", "Treehouse", "Igloo", "Yurt", "Cave", "Chalet", "Hut", "Tent", "Other"].sample
 
