@@ -21,11 +21,19 @@ Rails.application.routes.draw do
 
   get "users/edit" => "users#edit"
 
+  post  "users/edit"   => "users#update"
+
   get "listings/new" => "listings#new"
+
+  post "listings/new" => "listings#create"
 
   get "listings/:id" => "listings#show"
 
   get "listings/:id/verify" => "listings#verify"
+
+  get "listings/:id/edit" => "listings#edit"
+
+
 
 end
 

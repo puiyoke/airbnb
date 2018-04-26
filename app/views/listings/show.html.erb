@@ -1,3 +1,7 @@
+<% if @listing.images.url.present?%>
+<%= image_tag @listing.images.url %>
+<%end%>
+
 Property name: <%=@listing.name%><br>
 Price per night: <%=@listing.price%><br>
 Description: <%=@listing.description%><br>
@@ -7,4 +11,5 @@ Verified? <%=@listing.verified%><br>
 
 <% if signed_in? -%>
     <a href="/listings/<%= @listing.id%>/verify">verify</a><br>
+    <a href="/listings/<%= @listing.id%>/edit">Edit Listing</a><br>
 <%end%>
