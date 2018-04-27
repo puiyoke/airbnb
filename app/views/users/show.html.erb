@@ -1,0 +1,17 @@
+
+<% if @user.profile_image.url.present?%>
+<%= image_tag @user.profile_image.url(:thumb) %>
+<%end%><br>
+
+E-mail: <%=@user.email%><br>
+First name: <%=@user.first_name%><br>
+Last name: <%=@user.last_name%><br>
+Gender: <%=@user.gender%><br>
+Phone: <%=@user.phone%><br>
+Country: <%=@user.country%><br>
+Birthdate: <%=@user.birthdate%><br>
+
+<% if signed_in? -%>
+<a href="/users/edit">Edit Profile</a><br>
+<a href="">View Reservations</a><br>
+<%end%>

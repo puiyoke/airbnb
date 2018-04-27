@@ -19,12 +19,17 @@
           <h4>Welcome <%= current_user.email %></h4>
         <% end %>
         <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
-        <a href="/users/edit">Edit Profile</a> | <a href="/listings/new">New Listing</a>
+        <a href="/users/show">User Profile</a> | <a href="/listings/new">New Listing</a>
       <% else -%>
         <%= link_to t(".sign_in"), sign_in_path %> | 
         <%= link_to "Sign in with Google", "/auth/google_oauth2?prompt=select_account" %>
       <% end -%>
     </div>
+
+    <%= form_tag(listings_list_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "New Search Listings" %>
+      <%= submit_tag "Search"%>
+  <% end %>
 
     <div id="flash">
       <% flash.each do |key, value| -%>

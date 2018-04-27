@@ -1,6 +1,6 @@
-<% if @listing.images.url.present?%>
-<%= image_tag @listing.images.url %>
-<%end%>
+<% @listing.images.each do |x| %>
+    <%= image_tag (x.url(:thumb)) %>
+  <% end %><br>
 
 Property name: <%=@listing.name%><br>
 Price per night: <%=@listing.price%><br>

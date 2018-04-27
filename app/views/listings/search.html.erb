@@ -1,0 +1,17 @@
+<% if @listing.blank? %>
+<h4>There are no listings containing the term <%= params[:search] %>.</h4>
+<% end %>
+    
+    <div class="container">
+    <div class="row">
+    <% @listing.each do |x| %>
+        <div class="col-sm-4">
+            <img class="card-img-top" src= <%=x.images[0]%> alt="Card image cap">
+            <h4 class="card-title"><%= x.name %></h4>
+            <p class="card-text"><%= x.price %></p>
+            <a href="listings/<%= x.id%>" class="card-link">Check out this property</a>
+        </div>
+        <% end %>
+    </div>
+</div>
+

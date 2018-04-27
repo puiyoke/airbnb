@@ -5,7 +5,7 @@
     <div class="row">
     <% @listing.each do |x| %>
         <div class="col-sm-4">
-            <img class="card-img-top" src="" alt="Card image cap">
+            <img class="card-img-top" src= <%=x.images[0]%> alt="Card image cap">
             <h4 class="card-title"><%= x.name %></h4>
             <p class="card-text"><%= x.price %></p>
             <a href="listings/<%= x.id%>" class="card-link">Check out this property</a>
@@ -16,16 +16,9 @@
 
         <br><%= will_paginate @listing %>
 
+  
 
-
-
-
-
-
-
-
-
-
+    
 
         
         <% if false %>

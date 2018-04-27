@@ -1,7 +1,23 @@
 class ListingsController < ApplicationController
+    
+    def search
+        @listing = Listing.all
+        if params[:search]
+          @listing = Listing.search(params[:search]).order("created_at DESC")
+        else
+          @listing = Listing.all.order("created_at DESC")
+        end
+        
+    end
+
+    def list
+        @listing = Listing.all
+    end
+    
     def show
         @listing = Listing.find_by(id: params[:id])
     end
+    
 
     def new
         @listing = Listing.new
@@ -10,6 +26,9 @@ class ListingsController < ApplicationController
         end
     end
 
+    def listing_params
+        params.require(:listing).permit({images: []}, {remote_images_urls: []}, :remote_images_urls, :name, :property_type, :guest_number, :country, :state, :city, :zipcode, :address, :price, :description, :user_id)
+    end
 
     def create
         @listing = Listing.new(listing_params)
@@ -23,16 +42,25 @@ class ListingsController < ApplicationController
         end
     end
 
-    def listing_params
-            params.require(:listing).permit({images: []}, :name, :property_type, :guest_number, :country, :state, :city, :zipcode, :address, :price, :description, :user_id)
+
+    def edit
+        @listing = Listing.find(params[:id])
     end
 
-    def show
-        @listing = Listing.find(params[:id]) 
-        respond_to do |format|
-          format.html  # show.html.erb
+    def update
+        @listing = Listing.find(params[:id])
+        if @listing.user_id == current_user.id
+            if @listing.update_attributes(listing_params)
+                redirect_back_or root_path
+            else
+                render 'edit'
+            end
+        else
+            return redirect_to root_path, notice: "Sorry. You do not have the permission to edit the property."
         end
     end
+
+
 
     def verify
         # authorization code
@@ -47,4 +75,8 @@ class ListingsController < ApplicationController
             return redirect_to root_path, notice: "Okay."
         end
     end
+
+
+
 end
+

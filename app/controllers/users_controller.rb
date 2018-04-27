@@ -1,5 +1,8 @@
 class UsersController < Clearance::UsersController
 
+    def show
+        @user = current_user
+    end
 
     def new
         @user = user_from_params
@@ -32,7 +35,7 @@ class UsersController < Clearance::UsersController
     private
 
     def user_params
-     params.require(:user).permit(:profile_image, :remote_profile_image_url, :email, :first_name, :last_name, :phone, :country, :birthdate)
+     params.require(:user).permit(:profile_image, :remote_profile_image_url, :email, :first_name, :last_name, :gender, :phone, :country, :birthdate)
     end
 
     def user_from_params

@@ -23,9 +23,13 @@ Rails.application.routes.draw do
 
   post  "users/edit"   => "users#update"
 
+  get "users/show" => "users#show"
+
   get "listings/new" => "listings#new"
 
   post "listings/new" => "listings#create"
+
+  get "listings/list" => "listings#search"
 
   get "listings/:id" => "listings#show"
 
@@ -33,6 +37,7 @@ Rails.application.routes.draw do
 
   get "listings/:id/edit" => "listings#edit"
 
+  post "listings/:id/edit"  => "listings#update"
 
 
 end
