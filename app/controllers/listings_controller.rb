@@ -61,6 +61,7 @@ class ListingsController < ApplicationController
     end
 
     def reserve
+        @host = User.find(Listing.find(params[:id]).user_id)
         @user = current_user
         @reservation = Reservation.new(reserve_params)
         respond_to do |format|
@@ -68,6 +69,8 @@ class ListingsController < ApplicationController
             @reservation.user_id = current_user.id
             if @reservation.save
                 format.html  { redirect_to users_reservations_url :notice => 'Reservation was successfully made.' }
+                ReservationMailer.booking_email(@user.email).deliver_now
+                ReservationMailer.confirmation_email(@host.email).deliver_now
             else
                 return redirect_to root_path, notice: "Sorry. Reservation failed. Overlapping reservation exists."
             end

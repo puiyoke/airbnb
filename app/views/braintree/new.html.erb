@@ -1,15 +1,16 @@
+
+
 <%@listing = Listing.find_by(id: @this_reservation.listing_id)%>
 Reservation ID:<%=@this_reservation.id%><br>
+Property ID:<%=@listing.id%><br>
 Property Name:<%=@listing.name%><br>
 Days of stay:<%=(@this_reservation.check_out - @this_reservation.check_in).to_i%><br>
 Price/night:<%=@listing.price%><br>
-
+Total Price:<%=@listing.price.to_i * (@this_reservation.check_out - @this_reservation.check_in).to_i%>
 
 <div class="demo-frame">
 
-<%= form_for :checkout_form, url: braintree_checkout_path, html: { id: "cardForm"} do |form| %>
-    Total Amount<br>
-    <%= form.text_field :amount,:readonly => true, :value => @listing.price * (@this_reservation.check_out - @this_reservation.check_in).to_i%><br><br>
+<%= form_for :checkout_form, html: { id: "cardForm"} do |form| %>
 
     <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label"} %>
     <div id="card-number" class="hosted-field"></div>

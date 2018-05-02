@@ -47,7 +47,8 @@ Rails.application.routes.draw do
 
   get 'braintree/:id' => 'braintree#new'
   
-  post 'braintree/checkout'
+  post 'braintree/:id' => "braintree#checkout"
+
 
 end
 
