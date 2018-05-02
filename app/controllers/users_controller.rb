@@ -32,6 +32,12 @@ class UsersController < Clearance::UsersController
       end
     end
 
+    def reservations
+        @user = current_user
+        @reservation = Reservation.all
+
+    end
+
     private
 
     def user_params

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   get "users/show" => "users#show"
 
+  get "users/reservations" => "users#reservations"
+
   get "listings/new" => "listings#new"
 
   post "listings/new" => "listings#create"
@@ -33,12 +35,19 @@ Rails.application.routes.draw do
 
   get "listings/:id" => "listings#show"
 
+  get "listings/:id/reservation" => "listings#reservation"
+
+  post "listings/:id/reservation" => "listings#reserve"
+
   get "listings/:id/verify" => "listings#verify"
 
   get "listings/:id/edit" => "listings#edit"
 
   post "listings/:id/edit"  => "listings#update"
 
+  get 'braintree/:id' => 'braintree#new'
+  
+  post 'braintree/checkout'
 
 end
 

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :listings
+  has_many :reservations
   include Clearance::User
   has_many :authentications, dependent: :destroy
   enum role: [:customer, :moderator, :super_admin]

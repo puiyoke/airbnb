@@ -60,7 +60,23 @@ class ListingsController < ApplicationController
         end
     end
 
+    def reserve
+        @user = current_user
+        @reservation = Reservation.new(reserve_params)
+        respond_to do |format|
+            @reservation.listing_id = params[:id]
+            @reservation.user_id = current_user.id
+            if @reservation.save
+                format.html  { redirect_to users_reservations_url :notice => 'Reservation was successfully made.' }
+            else
+                return redirect_to root_path, notice: "Sorry. Reservation failed. Overlapping reservation exists."
+            end
+        end
+    end
 
+    def reserve_params
+        params.require(:reservation).permit(:check_in, :check_out, :user_id, :listing_id)
+    end
 
     def verify
         # authorization code
