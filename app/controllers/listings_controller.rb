@@ -69,8 +69,8 @@ class ListingsController < ApplicationController
             @reservation.user_id = current_user.id
             if @reservation.save
                 format.html  { redirect_to users_reservations_url :notice => 'Reservation was successfully made.' }
-                ReservationMailer.booking_email(@user.email).deliver_now
-                ReservationMailer.confirmation_email(@host.email).deliver_now
+                ReservationJob.perform_later(@user, @host)
+
             else
                 return redirect_to root_path, notice: "Sorry. Reservation failed. Overlapping reservation exists."
             end
