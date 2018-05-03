@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Airbnb</title>
+    <title>Pairbnb</title>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -12,42 +12,29 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
     <script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
+
+    <%= render partial: 'partial/header' %>
+
     </head>
   <body>
     <div id="header">
       <% if signed_in? -%>
         <% if current_user.super_admin? %>
-          <h4>Welcome Super Admin <%= current_user.email %></h4>
+          <p>Logged in as Super Admin <%= current_user.email %></p>
         <% elsif current_user.moderator? %>
-          <h4>Welcome, Moderator <%= current_user.email %></h4>
+          <p>Logged in as Moderator <%= current_user.email %></p>
         <% else %>
-          <h4>Welcome <%= current_user.email %></h4>
+          <p>Logged in as <%= current_user.email %></p>
         <% end %>
-        <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
-        <a href="/users/show">User Profile</a> | <a href="/listings/new">New Listing</a>
-      <% else -%>
-        <%= link_to t(".sign_in"), sign_in_path %> | 
-        <%= link_to "Sign in with Google", "/auth/google_oauth2?prompt=select_account" %>
-      <% end -%>
-    </div>
-
-    <%= form_tag(listings_list_path, :method => "get", id: "search-form") do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search by Country or City" %>
-      <%= submit_tag "Search"%>
-  <% end %>
-
-    <div id="flash">
-      <% flash.each do |key, value| -%>
-        <div id="flash_<%= key %>"><%=h value %></div>
       <% end %>
     </div>
 
-    <%= yield %>
-    <a href="/">Home</a>
-    </div>
-     
+    <div id="flash">
+    <% flash.each do |key, value| -%>
+      <div id="flash_<%= key %>"><%=h value %></div><br>
+    <% end %>
   </div>
 
-
+    <%= yield %>
   </body>
 </html>
