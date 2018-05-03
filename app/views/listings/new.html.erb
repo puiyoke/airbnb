@@ -3,11 +3,15 @@
 
   <%=form_for :listing, url: "/listings/new", action: "new", controller: "listing" do |form|%>
 
-
     <%= form.file_field :images, multiple: true %>
+    <p>
+    <%= form.text_field :remote_images_urls, multiple: true %>
+  </p>
+  <p>
+  <%= form.text_field :remote_images_urls, multiple: true %>
+</p>
 
 
-  
   <div class="text-field">
     <%= form.label :name %>
     <%= form.text_field :name, type: 'name' %>

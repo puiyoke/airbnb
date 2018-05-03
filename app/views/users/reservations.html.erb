@@ -1,0 +1,14 @@
+
+
+<%@user.reservations.each do |x|%>
+    <%@listing = Listing.find_by(id: x.listing_id)%>
+    Reservation #: <%=x.id%><br>
+    Property Name: <%=@listing.name%><br>
+    Country: <%=@listing.country%><br>
+    Check-in date:  <%=x.check_in%> <br>
+    Check-out date:  <%=x.check_out%>  <br>
+    <a href="/braintree/<%= x.id%>">pay</a><br><br>
+<%end%>
+
+
+

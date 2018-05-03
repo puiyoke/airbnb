@@ -1,0 +1,68 @@
+<div class="edit-listings">
+  <h2>Edit Listing</h2>
+
+  
+    <%=form_for :listing, html: {multipart: true} do |form|%>
+    <%= form.file_field :images, multiple: true %>
+    <p>
+    <%= form.text_field :remote_images_urls, multiple: true %>
+  </p>
+  <p>
+  <%= form.text_field :remote_images_urls, multiple: true %>
+</p>
+
+
+  <div class="text-field">
+    <%= form.label :name %>
+    <%= form.text_field :name, type: 'name' %>
+  </div>
+  
+  <div class="text-field">
+    <%= form.label :property_type %>
+    <%= form.text_field :property_type, type: 'property_type' %>
+  </div>
+  
+  <div class="text-field">
+    <%= form.label :guest_number %>
+    <%= form.text_field :guest_number, type: 'guest_number' %>
+  </div>
+  
+  <div class="text-field">
+    <%= form.label :country %>
+    <%= form.text_field :country, type: 'country' %>
+  </div>
+  
+  <div class="text-field">
+    <%= form.label :state %>
+    <%= form.text_field :state, type: 'state' %>
+  </div>
+
+    <div class="text-field">
+    <%= form.label :city %>
+    <%= form.text_field :city, type: 'city' %>
+  </div>
+  
+  <div class="text-field">
+    <%= form.label :zipcode %>
+    <%= form.text_field :zipcode, type: 'zipcode' %>
+  </div>
+  
+  <div class="text-field">
+    <%= form.label :address %>
+    <%= form.text_field :address, type: 'address' %>
+  </div>
+  
+  <div class="text-field">
+    <%= form.label :price %>
+    <%= form.text_field :price, type: 'price' %>
+  </div>
+  
+  <div class="text-field">
+    <%= form.label :description %>
+    <%= form.text_field :description, type: 'description' %>
+  </div>
+  
+  <%= form.submit "Edit Listing" %>
+
+  <% end %>
+</div>

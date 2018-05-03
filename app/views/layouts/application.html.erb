@@ -1,50 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Airbnb</title>
+    <title>Pairbnb</title>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
 
+    <%= render partial: 'partial/header' %>
+
+    </head>
   <body>
     <div id="header">
       <% if signed_in? -%>
         <% if current_user.super_admin? %>
-          <h4>Welcome Super Admin <%= current_user.email %></h4>
+          <p>Logged in as Super Admin <%= current_user.email %></p>
         <% elsif current_user.moderator? %>
-          <h4>Welcome, Moderator <%= current_user.email %></h4>
+          <p>Logged in as Moderator <%= current_user.email %></p>
         <% else %>
-          <h4>Welcome <%= current_user.email %></h4>
+          <p>Logged in as <%= current_user.email %></p>
         <% end %>
-        <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
-        <a href="/users/edit">Edit Profile</a> | <a href="/listings/new">New Listing</a>
-      <% else -%>
-        <%= link_to t(".sign_in"), sign_in_path %> | 
-        <%= link_to "Sign in with Google", "/auth/google_oauth2?prompt=select_account" %>
-      <% end -%>
-    </div>
-
-    <div id="flash">
-      <% flash.each do |key, value| -%>
-        <div id="flash_<%= key %>"><%=h value %></div>
       <% end %>
     </div>
 
-    <%= yield %>
-    <a href="/">Home</a>
-    </div>
-     
+    <div id="flash">
+    <% flash.each do |key, value| -%>
+      <div id="flash_<%= key %>"><%=h value %></div><br>
+    <% end %>
   </div>
 
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
+    <%= yield %>
   </body>
 </html>

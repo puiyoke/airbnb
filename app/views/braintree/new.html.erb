@@ -1,0 +1,103 @@
+
+
+<%@listing = Listing.find_by(id: @this_reservation.listing_id)%>
+Reservation ID:<%=@this_reservation.id%><br>
+Property ID:<%=@listing.id%><br>
+Property Name:<%=@listing.name%><br>
+Days of stay:<%=(@this_reservation.check_out - @this_reservation.check_in).to_i%><br>
+Price/night:<%=@listing.price%><br>
+Total Price:<%=@listing.price.to_i * (@this_reservation.check_out - @this_reservation.check_in).to_i%>
+
+<div class="demo-frame">
+
+<%= form_for :checkout_form, html: { id: "cardForm"} do |form| %>
+
+    <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label"} %>
+    <div id="card-number" class="hosted-field"></div>
+
+    <%= form.label :expiration_date, "Expiration Date", html: {class: "hosted-fields--label"} %>
+    <div id="expiration-date" class="hosted-field"></div>
+
+    <%= form.label :cvv, "CVV", html: {class: "hosted-fields--label"} %>
+    <div id="cvv" class="hosted-field"></div>
+
+    <%= form.hidden_field "payment_method_nonce" %>
+
+    <div class="button-container">
+      <%= form.submit "Purchase", disabled: true, class: "btn btn-primary", id: "button-btn" %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+<script>
+
+var form = document.querySelector('#cardForm');
+var submit = document.querySelector("#button-btn");
+var authorization = '<%= @client_token %>';
+
+braintree.client.create({
+
+  authorization: authorization
+}, function (clientErr, clientInstance) {
+  if (clientErr) {
+
+    return;
+  }
+
+  braintree.hostedFields.create({
+    client: clientInstance,
+    styles: {
+      'input': {
+        'font-size': '14pt'
+      },
+      'input.invalid': {
+        'color': 'red'
+      },
+      'input.valid': {
+        'color': 'green'
+      }
+    },
+    fields: {
+      number: {
+        selector: '#card-number',
+        placeholder: '4111 1111 1111 1111'
+      },
+      cvv: {
+        selector: '#cvv',
+        placeholder: '123'
+      },
+      expirationDate: {
+        selector: '#expiration-date',
+        placeholder: '10/2019'
+      }
+    }
+  }, function (hostedFieldsErr, hostedFieldsInstance) {
+    if (hostedFieldsErr) {
+
+      return;
+    }
+
+    submit.removeAttribute('disabled');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+        if (tokenizeErr) {
+
+          return;
+        }
+
+
+        document.querySelector('input[name="checkout_form[payment_method_nonce]"]').value = payload.nonce;
+        form.submit();
+      });
+    }, false);
+  });
+});
+
+</script>

@@ -1,5 +1,10 @@
+require 'sidekiq/web'
+
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+
+  mount Sidekiq::Web => 'sidekiq'
+  resources :properties
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 
@@ -9,8 +14,10 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
-  root "welcome#index"
+  root to: "welcome#index"
 
+  get '/' => "welcome#index"
+  
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
 
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
@@ -23,16 +30,31 @@ Rails.application.routes.draw do
 
   post  "users/edit"   => "users#update"
 
+  get "users/show" => "users#show"
+
+  get "users/reservations" => "users#reservations"
+
   get "listings/new" => "listings#new"
 
   post "listings/new" => "listings#create"
 
+  get "listings/list" => "listings#search"
+
   get "listings/:id" => "listings#show"
+
+  get "listings/:id/reservation" => "listings#reservation"
+
+  post "listings/:id/reservation" => "listings#reserve"
 
   get "listings/:id/verify" => "listings#verify"
 
   get "listings/:id/edit" => "listings#edit"
 
+  post "listings/:id/edit"  => "listings#update"
+
+  get 'braintree/:id' => 'braintree#new'
+  
+  post 'braintree/:id' => "braintree#checkout"
 
 
 end
