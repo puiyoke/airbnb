@@ -5,6 +5,7 @@ class Reservation < ApplicationRecord
     validate :reservations_must_not_overlap
     
 
+
       private
       
       def reservations_must_not_overlap
