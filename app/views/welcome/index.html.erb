@@ -1,0 +1,64 @@
+<h1>Airbnb</h1>
+<p>Featured Listing</p>
+
+<div class="container">
+    <div class="row">
+    <% @listing.each do |x| %>
+        <div class="col-sm-4">
+            <img class="card-img-top" src="" alt="Card image cap">
+            <h4 class="card-title"><%= x.name %></h4>
+            <p class="card-text"><%= x.price %></p>
+            <a href="listings/<%= x.id%>" class="card-link">Check out this property</a>
+        </div>
+        <% end %>
+    </div>
+</div>
+
+        <br><%= will_paginate @listing %>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <% if false %>
+        ^^if false comments out the codes below -- keeping codes below for reference
+        
+        <% @listing.to_ary.in_groups_of(3) do |x, y, z| %>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                <% if x.present?%>
+                        <img class="card-img-top" src="" alt="Card image cap">
+                        <h4 class="card-title"><%= x.name %></h4>
+                        <p class="card-text"><%= x.price %></p>
+                        <a href="#" class="card-link">Check out this property</a>
+                    </div>
+                <%end%>
+                   <% if y.present?%>
+                    <div class="col-sm">
+                        <img class="card-img-top" src="" alt="Card image cap">
+                        <h4 class="card-title"><%= y.name %></h4>
+                        <p class="card-text"><%= y.price %></p>
+                        <a href="#" class="card-link">Check out this property</a>
+                    </div>
+                    <%end%>
+                    <% if z.present?%>
+                    <div class="col-sm">
+                        <img class="card-img-top" src="" alt="Card image cap">
+                        <h4 class="card-title"><%= z.name %></h4>
+                        <p class="card-text"><%= z.price %></p>
+                        <a href="#" class="card-link">Check out this property</a>
+                    </div>
+                    <%end%>
+                </div>
+            </div>
+            <% end %>
+            <% end %>
