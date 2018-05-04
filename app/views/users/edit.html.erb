@@ -1,46 +1,54 @@
-<%= form_for :user, url: "/users/edit", action: :update, method: :post  do |form| %>
+<div class="edit-user">
+  <h2>Edit your profile</h2><br>
 
-  <p>
+<%= form_for :user, url: "/users/edit", action: :update, method: :post  do |form| %>
+  <div class="form-group col-md-4">
   <% if @user.profile_image_url.present?%>
   <%= image_tag @user.profile_image_url(:thumb) %>
   <%end%>
-  </p>
-<p>Upload profile image:<br>
-<%= form.file_field :profile_image %></p>
-<p>Upload profile image from url:<br>
-<%= form.text_field :remote_profile_image_url %></p>
+  </div>
+<div class="form-group col-md-4">
+  <p>Upload profile image:<br>
+  <%= form.file_field :profile_image %></p>
+</div>
 
-<div class="text-field">
+<div class="form-group col-md-4">
+  <p>Upload profile image from url:<br>
+  <%= form.text_field :remote_profile_image_url, class:"form-control" %></p>
+</div>
+
+<div class="form-group col-md-4">
   <%= form.label :first_name %>
-  <%= form.text_field :first_name, type: 'first_name' %>
+  <%= form.text_field :first_name, type: 'first_name', class:"form-control" %>
 </div>
 
-<div class="text-field">
+<div class="form-group col-md-4">
   <%= form.label :last_name %>
-  <%= form.text_field :last_name, type: 'last_name' %>
+  <%= form.text_field :last_name, type: 'last_name', class:"form-control" %>
 </div>
 
-<div class="text-field">
+<div class="form-group col-md-4">
   <%= form.label :gender %>
-  <%= form.text_field :gender, type: 'gender' %>
+  <%= form.text_field :gender, type: 'gender', class:"form-control" %>
 </div>
 
-<div class="text-field">
+<div class="form-group col-md-4">
   <%= form.label :phone %>
-  <%= form.text_field :phone, type: 'phone' %>
+  <%= form.text_field :phone, type: 'phone', class:"form-control" %>
 </div>
 
-<div class="text-field">
+<div class="form-group col-md-4">
   <%= form.label :country %>
-  <%= form.text_field :country, type: 'country' %>
+  <%= form.text_field :country, type: 'country', class:"form-control" %>
 </div>
 
-<div class="text-field">
+<div class="form-group col-md-4">
   <%= form.label :birthdate %>
-  <%= form.text_field :birthdate, type: 'birthdate' %>
+  <%= form.text_field :birthdate, type: 'birthdate', class:"form-control" %>
 </div>
 
-<%= form.submit "Update Account" %>
-
+<div class="form-group col-md-4">
+<button type="submit" class="btn btn-primary">Update Account</button>
+</div>
 <% end %>
 

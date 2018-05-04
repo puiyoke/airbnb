@@ -1,68 +1,70 @@
 <div class="new-listings">
-  <h2>New Listing</h2>
+  <h2>New Listing</h2><br>
 
   <%=form_for :listing, url: "/listings/new", action: "new", controller: "listing" do |form|%>
+    <div class="form-group col-md-4">
+    Upload images
+    <%= form.file_field :images, multiple: true %><br><br>
+    OR
+    </div>
 
-    <%= form.file_field :images, multiple: true %>
-    <p>
-    <%= form.text_field :remote_images_urls, multiple: true %>
-  </p>
-  <p>
-  <%= form.text_field :remote_images_urls, multiple: true %>
-</p>
+    <div class="form-group col-md-4">
+    Upload images from URL
+    <%= form.text_field :remote_images_urls, multiple: true, class:"form-control" %>
+    </div>
 
-
-  <div class="text-field">
+  <div class="form-group col-md-4">
     <%= form.label :name %>
-    <%= form.text_field :name, type: 'name' %>
+    <%= form.text_field :name, type: 'name', class:"form-control" %>
   </div>
   
-  <div class="text-field">
+  <div class="form-group col-md-4">
     <%= form.label :property_type %>
-    <%= form.text_field :property_type, type: 'property_type' %>
+    <%= form.text_field :property_type, type: 'property_type', class:"form-control" %>
   </div>
   
-  <div class="text-field">
+  <div class="form-group col-md-4">
     <%= form.label :guest_number %>
-    <%= form.text_field :guest_number, type: 'guest_number' %>
+    <%= form.text_field :guest_number, type: 'guest_number', class:"form-control" %>
   </div>
   
-  <div class="text-field">
+  <div class="form-group col-md-4">
     <%= form.label :country %>
-    <%= form.text_field :country, type: 'country' %>
+    <%= form.text_field :country, type: 'country', class:"form-control" %>
   </div>
   
-  <div class="text-field">
+  <div class="form-group col-md-4">
     <%= form.label :state %>
-    <%= form.text_field :state, type: 'state' %>
+    <%= form.text_field :state, type: 'state', class:"form-control" %>
   </div>
 
-    <div class="text-field">
+    <div class="form-group col-md-4">
     <%= form.label :city %>
-    <%= form.text_field :city, type: 'city' %>
+    <%= form.text_field :city, type: 'city', class:"form-control" %>
   </div>
   
-  <div class="text-field">
+  <div class="form-group col-md-4">
     <%= form.label :zipcode %>
-    <%= form.text_field :zipcode, type: 'zipcode' %>
+    <%= form.text_field :zipcode, type: 'zipcode', class:"form-control" %>
   </div>
   
-  <div class="text-field">
+  <div class="form-group col-md-4">
     <%= form.label :address %>
-    <%= form.text_field :address, type: 'address' %>
+    <%= form.text_field :address, type: 'address', class:"form-control" %>
   </div>
   
-  <div class="text-field">
+  <div class="form-group col-md-4">
     <%= form.label :price %>
-    <%= form.text_field :price, type: 'price' %>
+    <%= form.text_field :price, type: 'price', class:"form-control" %>
   </div>
   
-  <div class="text-field">
+  <div class="form-group col-md-4">
     <%= form.label :description %>
-    <%= form.text_field :description, type: 'description' %>
+    <%= form.text_field :description, type: 'description', class:"form-control" %>
   </div>
   
-  <%= form.submit "Create Listing" %>
-
+  <div class="form-group col-md-4">
+  <button type="submit" class="btn btn-primary">Create Listing</button>
+  </div>
   <% end %>
 </div>

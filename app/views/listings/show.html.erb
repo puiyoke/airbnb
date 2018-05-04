@@ -18,13 +18,20 @@
 
 Property name: <%=@listing.name%><br>
 Price per night: <%=@listing.price%><br>
+Property type: <%=@listing.property_type%><br>
+Number of guests: <%=@listing.guest_number%><br>
 Description: <%=@listing.description%><br>
 Country: <%=@listing.country%><br>
-Address: <%=@listing.address%><br>
+Address: <%=@listing.address%>, <%=@listing.zipcode%>, <%=@listing.city%><br>
 Verified? <%=@listing.verified%><br>
 
-<% if signed_in? -%>
+<% if current_user.super_admin? -%>
     <a href="/listings/<%= @listing.id%>/verify">verify</a><br>
-    <a href="/listings/<%= @listing.id%>/edit">Edit Listing</a><br>
+<%end%>
+
+<% if signed_in? -%>
     <a href="/listings/<%= @listing.id%>/reservation">Book/Reserve</a><br>
+<%end%>
+<% if @listing.user_id == current_user.id -%>
+  <a href="/listings/<%= @listing.id%>/edit">Edit Listing</a><br>
 <%end%>

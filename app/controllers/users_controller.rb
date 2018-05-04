@@ -26,7 +26,7 @@ class UsersController < Clearance::UsersController
      def update
         @user = current_user
        if @user.update_attributes(user_params)
-        redirect_back_or url_after_create
+        redirect_back_or users_show_path
       else
         render 'edit'
       end
@@ -40,13 +40,12 @@ class UsersController < Clearance::UsersController
 
     private
 
-    def user_params
-     params.require(:user).permit(:profile_image, :remote_profile_image_url, :email, :first_name, :last_name, :gender, :phone, :country, :birthdate)
-    end
+
 
     def user_from_params
         user_params = params[:user] || Hash.new
         profile_image = user_params.delete(:profile_image)
+        remote_profile_image_url= user_params.delete(remote_profile_image_url)
         email = user_params.delete(:email)
         password = user_params.delete(:password)
         first_name = user_params.delete(:first_name)
@@ -58,6 +57,7 @@ class UsersController < Clearance::UsersController
       
         Clearance.configuration.user_model.new(user_params).tap do |user|
             user.profile_image = profile_image
+            user.remote_profile_image_url = remote_profile_image_url
             user.email = email
             user.password = password
             user.first_name = first_name
@@ -69,8 +69,12 @@ class UsersController < Clearance::UsersController
         end
     end
 
+    def user_params
+        params.require(:user).permit(:profile_image, :remote_profile_image_url, :email, :password, :first_name, :last_name, :gender, :phone, :country, :birthdate)
+       end
+
       def permit_params
-        params.require(:user).permit(:profile_image, :email, :first_name, :last_name, :gender, :phone, :country, :birthdate)
+        params.require(:user).permit(:profile_image, :remote_profile_image_url, :password, :email, :first_name, :last_name, :gender, :phone, :country, :birthdate)
       end 
 
 end
