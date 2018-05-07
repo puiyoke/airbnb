@@ -1,8 +1,9 @@
 <div class="edit-listings">
   <h2>Edit Listing</h2><br>
 
+  <%=form_for :listing, html: {multipart: true} do |form|%>
+
   <div class="form-group col-md-4">
-    <%=form_for :listing, html: {multipart: true} do |form|%>
     <%= form.file_field :images, multiple: true %>
   </div>
 

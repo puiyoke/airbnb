@@ -83,3 +83,5 @@ gem 'mail'
 gem 'sidekiq'
 
 gem 'rails_12factor', group: :production
+
+gem "fog-aws"

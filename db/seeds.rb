@@ -9,7 +9,7 @@
 
 require 'faker'
 
-# Seed Users
+Seed Users
 user = {}
 user['password'] = 'asdf'
 

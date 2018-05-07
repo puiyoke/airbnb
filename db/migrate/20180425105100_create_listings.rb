@@ -12,7 +12,9 @@ class CreateListings < ActiveRecord::Migration[5.1]
         t.string :address, null: false
         t.string :price, null: false
         t.string :description, null: false
-        t.boolean :verified, default: false
+        t.string :phone, null: false
+        t.boolean :verified
+        t.json :images
         t.references :user, foreign_key: true
       end
     end

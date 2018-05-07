@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 20180429103700) do
     t.string "address", null: false
     t.string "price", null: false
     t.string "description", null: false
-    t.boolean "verified", default: false
-    t.bigint "user_id"
+    t.string "phone", null: false
+    t.boolean "verified"
     t.json "images"
-    t.string "imgs"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
