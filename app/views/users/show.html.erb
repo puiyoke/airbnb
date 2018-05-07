@@ -1,6 +1,8 @@
 
 <% if @user.profile_image.url.present?%>
-<%= image_tag @user.profile_image.url(:thumb) %>
+    <%= image_tag @user.profile_image.url(:thumb) %>
+<% else %>
+	<img src="https://s3-ap-southeast-1.amazonaws.com/pairbnbimagebucket/default_avatar.png" alt="Card image cap">
 <%end%><br>
 
 E-mail: <%=@user.email%><br>

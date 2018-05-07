@@ -22,24 +22,22 @@ class ListingsController < ApplicationController
     def new
         @listing = Listing.new
         respond_to do |format|
-            format.html  # new.html.erb
+            format.html
         end
     end
 
     def listing_params
-        params.require(:listing).permit({images: []}, {remote_images_urls: []}, :remote_images_urls, :name, :property_type, :guest_number, :country, :state, :city, :zipcode, :address, :price, :description, :user_id)
+        params.require(:listing).permit({images: []}, {remote_images_urls: []}, :remote_images_urls, :name, :property_type, :guest_number, :country, :state, :city, :zipcode, :address, :price, :description, :user_id, :phone)
     end
 
     def create
         @listing = Listing.new(listing_params)
-        respond_to do |format|
-            @listing.user_id = current_user.id
+        @listing.user_id = current_user.id
             if @listing.save
-                format.html  { redirect_to listings_new_url :notice => 'Listing was successfully created.' }
+                redirect_to root_path, notice: 'Listing was successfully created.'
             else
-                format.html  { render :action => "new" }
+                render template: "listings/new"
             end
-        end
     end
 
 

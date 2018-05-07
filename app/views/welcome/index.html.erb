@@ -3,13 +3,21 @@
 
 <div class="container">
     <div class="row">
-    <% @listing.each do |x| %>
-        <div class="col-sm-4">
-            <img class="card-img-top" src= <%=x.images[0]%> alt="Card image cap">
-            <h4 class="card-title"><%= x.name %></h4>
-            <p class="card-text"><%= x.price %></p>
-            <a href="listings/<%= x.id%>" class="card-link">Check out this property</a>
-        </div>
+        <% @listing.each do |x| %>
+            <div class="col-sm-4">
+            <% if x.images? %>
+                <img class="card-img-top" src= <%=x.images[0]%> alt="Card image cap">
+            <% else %>
+                <img class="card-img-top" src="https://s3-ap-southeast-1.amazonaws.com/pairbnbimagebucket/default_house.png" alt="Card image cap">
+            <% end%>
+                <h4 class="card-title"><%= x.name %></h4>
+                <p class="card-text"><%= x.price %></p>
+                <%if signed_in?%>
+                    <a href="listings/<%= x.id%>" class="card-link">Check out this property</a>
+                <%else%>
+                    <a href="/sign_in" class="card-link">Check out this property</a>
+                <%end%>
+            </div>
         <% end %>
     </div>
 </div>

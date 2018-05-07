@@ -13,6 +13,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
         t.string :country
         t.date :birthdate
         t.integer :role, :default => 0
+        t.string :profile_image
       end
   
       add_index :users, :email
